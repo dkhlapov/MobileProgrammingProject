@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Project_final",
-    "slug": "Project_final",
+    "name": "MobileProgrammingProject",
+    "slug": "dkhlapov-mobile2021",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/dkhlapov/MobileProgrammingProject"
   }
 }
