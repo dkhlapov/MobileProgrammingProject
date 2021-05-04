@@ -1,21 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer} from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons} from '@expo/vector-icons';
+import {TeamStackScreen} from './components/TeamStack';
+import {PlayerStackScreen} from './components/PlayersStack';
+import {AppearanceProvider, useColorScheme} from 'react-native-appearance'
+import {DefaultTheme, DarkTheme} from "@react-navigation/native";
 
 export default function App() {
+  
+  const screenOptions = ({ route }) => ({
+    tabBarIcon: ({ focused, color, size }) => {
+      let iconName;
+  
+      if (route.name === 'Teams') {
+        iconName = 'account-group';
+      } else if (route.name === 'Players') {
+        iconName = 'human-male';
+      }
+  
+      return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+    }
+
+  });
+
+  const Tab = createBottomTabNavigator();
+  const scheme = useColorScheme();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <AppearanceProvider>
+        <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
+          <Tab.Navigator screenOptions={screenOptions}>
+            <Tab.Screen name="Teams" component={TeamStackScreen} />
+            <Tab.Screen name="Players" component={PlayerStackScreen} />
+            {/*<Tab.Screen name="Settings" component={SettingsScreen} />*/}
+          </Tab.Navigator>
+        </NavigationContainer>
+      </AppearanceProvider>
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
